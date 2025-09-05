@@ -47,7 +47,7 @@ source "qemu" "rocky-amd64" {
   boot_command = [
     "<esc><wait><up>e<wait><down><down><down><left> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rocky-install.ks PACKER_USER=${var.username} PACKER_AUTHORIZED_KEY={{ .SSHPublicKey | urlquery }}<wait><leftCtrlOn>x<leftCtrlOff>"
   ]
-  boot_key_interval = "20ms"
+  boot_key_interval = "50ms"
   qemuargs = [ # kernel panics if not set...
     ["-machine", "type=q35,accel=hvf:kvm:whpx:tcg:none"],
     ["-m", "${var.ram}M"],
