@@ -1,0 +1,43 @@
+name: workspace
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: "dev-workspace-rocky10"
+            script: "rocky.pkr.hcl"
+            
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@76e3039aa951aa4e6efe7e6ee06bc9ceb072142d # 27th Aug 2024 (last commit as of 5th Sept '25)
+        id: setup
+        with:
+          version: "latest"
+
+      - name: Run `packer init`
+        id: init
+        working-directory: ./${{ matrix.image }}
+        run: "packer init ./${{ matrix.script }}"
+
+      - name: Run `packer validate`
+        id: validate
+        working-directory: ./${{ matrix.image }}
+        run: "packer validate ./${{ matrix.script }}"
+
+      - name: Run `packer build`
+        working-directory: ./${{ matrix.image }}
+        run: packer build -color=false -on-error=abort ./${{ matrix.script }}
+        timeout-minutes: 30
+
