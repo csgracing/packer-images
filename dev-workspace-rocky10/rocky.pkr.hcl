@@ -34,7 +34,7 @@ source "qemu" "rocky-amd64" {
   shutdown_command  = "sudo shutdown -P now"
   disk_size         = "8192M"
   format            = "qcow2"
-  accelerator       = "kvm"
+  # if `accelerator` isn't specified; packer will try `kvm` followed by `tcg`
   ssh_username      = "${var.username}"
   ssh_timeout       = "20m"
   vm_name           = "rocky"
