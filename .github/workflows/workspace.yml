@@ -20,10 +20,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: amd64
+      - name: Install `qemu-system`
+        run: sudo apt update && sudo apt install -y qemu-system-x86
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@76e3039aa951aa4e6efe7e6ee06bc9ceb072142d # 27th Aug 2024 (last commit as of 5th Sept '25)
