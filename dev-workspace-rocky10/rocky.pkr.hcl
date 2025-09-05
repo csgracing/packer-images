@@ -51,7 +51,8 @@ source "qemu" "rocky-amd64" {
   boot_key_interval = "20ms"
   qemuargs = [ # kernel panics if not set...
     ["-m", "${var.ram}M"],
-    ["-smp", "${var.cpu}"]
+    ["-smp", "${var.cpu}"],
+    ["-nographic"]
   ]
 }
 
