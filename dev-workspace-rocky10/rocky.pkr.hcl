@@ -42,7 +42,6 @@ source "qemu" "rocky-amd64" {
   boot_wait         = "1s" # 0s - https://github.com/hashicorp/packer/pull/9022
   headless          = false
   disk_compression  = true
-  machine_type = "q35"
   cpu_model = "host" # otherwise gets stuck probing edd
   http_directory = "./http"
   boot_command = [
@@ -50,6 +49,7 @@ source "qemu" "rocky-amd64" {
   ]
   boot_key_interval = "20ms"
   qemuargs = [ # kernel panics if not set...
+    ["-machine", "type=q35,accel=hvf:kvm:whpx:tcg:none"],
     ["-m", "${var.ram}M"],
     ["-smp", "${var.cpu}"],
     ["-nographic"]
