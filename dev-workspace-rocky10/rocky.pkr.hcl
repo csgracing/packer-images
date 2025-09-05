@@ -32,7 +32,7 @@ source "qemu" "rocky-amd64" {
   iso_checksum      = "sha256:de75c2f7cc566ea964017a1e94883913f066c4ebeb1d356964e398ed76cadd12"
   output_directory  = "artifacts"
   shutdown_command  = "sudo shutdown -P now"
-  disk_size         = "5120M"
+  disk_size         = "8192M"
   format            = "qcow2"
   accelerator       = "kvm"
   ssh_username      = "${var.username}"
