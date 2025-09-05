@@ -15,7 +15,7 @@ variable "username" {
 
 variable "cpu" {
   type    = string
-  default = "6"
+  default = "4"
 }
 
 variable "ram" {
