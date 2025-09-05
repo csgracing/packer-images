@@ -19,7 +19,7 @@ cd $KERNEL_WORKING_DIR
 curl -L -o linux-$KERNEL_VERSION.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$KERNEL_VERSION.tar.xz
 
 # extract into working dir (without parent folder)
-tar xvJf linux-$KERNEL_VERSION.tar.xz -C $KERNEL_SOURCE_DIR --strip-components 1
+tar xJf linux-$KERNEL_VERSION.tar.xz -C $KERNEL_SOURCE_DIR --strip-components 1
 
 # kernel src now present in /opt/kernel/$KERNEL_VERSION/src
 
