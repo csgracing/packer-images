@@ -42,17 +42,17 @@ source "qemu" "rocky-amd64" {
   boot_wait         = "1s" # 0s - https://github.com/hashicorp/packer/pull/9022
   headless          = false
   disk_compression  = true
-  cpu_model = "host" # otherwise gets stuck probing edd
+  cpu_model = "Broadwell-v1"
   http_directory = "./http"
   boot_command = [
-    "<esc><wait><up>e<wait><down><down><down><left> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rocky-install.ks PACKER_USER=${var.username} PACKER_AUTHORIZED_KEY={{ .SSHPublicKey | urlquery }}<f10>"
+    "<esc><wait><up>e<wait><down><down><down><left> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rocky-install.ks PACKER_USER=${var.username} PACKER_AUTHORIZED_KEY={{ .SSHPublicKey | urlquery }}<wait><leftCtrlOn>x<leftCtrlOff>"
   ]
   boot_key_interval = "20ms"
   qemuargs = [ # kernel panics if not set...
     ["-machine", "type=q35,accel=hvf:kvm:whpx:tcg:none"],
     ["-m", "${var.ram}M"],
     ["-smp", "${var.cpu}"],
-    ["-nographic"]
+    ["-display", "none"]
   ]
 }
 
