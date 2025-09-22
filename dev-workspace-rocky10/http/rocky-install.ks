@@ -14,8 +14,11 @@ firewall --enabled --service=mdns
 skipx
 zerombr
 clearpart --all
-autopart --type=lvm
-# part / --size 5120 --grow --fstype ext4
+
+reqpart --add-boot
+part swap --fstype=swap --size=2048
+part / --fstype=xfs --size=1024 --grow
+
 services --enabled=NetworkManager
 network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
