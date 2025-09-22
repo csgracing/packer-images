@@ -61,6 +61,6 @@ build {
 
   provisioner "shell" {
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts = ["scripts/10-base-packages.sh", "scripts/11-kernel.sh", "scripts/12-cloud-init.sh"]
+    scripts = ["scripts/10-base-packages.sh", "scripts/11-kernel.sh", "scripts/12-cloud-init.sh", "scripts/13-misc-packages.sh"]
   }
 }
